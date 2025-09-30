@@ -4,6 +4,17 @@ const ctx = canvas.getContext("2d");
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
+/* Why I Love You */
+      .reasons {
+        margin: 30px auto;
+        width: 80%;
+        font-size: 20px;
+        text-align: left;
+      }
+      .reason {
+        opacity: 0;
+        transition: opacity 1s ease-in;
+      }
 class Particle {
   constructor(x, y, color) {
     this.x = x;
@@ -33,6 +44,7 @@ class Particle {
 function openLetter(msg) {
   alert(msg);
 }
+
 
 // Surprise Button - Petals
 function dropPetals() {
@@ -77,3 +89,4 @@ function animate() {
 }
 
 animate();
+
