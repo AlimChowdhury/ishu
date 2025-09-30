@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Happy Birthday My Love ❤️</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to right, #ffdde1, #ee9ca7);
+        font-family: "Segoe UI", sans-serif;
+        overflow-x: hidden;
+        text-align: center;
+      }
+
+      /* Slideshow */
+      .slideshow {
+        width: 100%;
+        max-width: 600px;
+        margin: 20px auto;
+        position: relative;
+      }
+      .slides {
+        display: none;
+        width: 100%;
+        border-radius: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Typewriter Quotes */
+      .quote {
+        font-size: 22px;
+        margin: 20px auto;
+        width: 80%;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 3px solid #333;
+        animation: typing 4s steps(40, end), blink 0.75s step-end infinite;
+      }
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 80%;
+        }
+      }
+      @keyframes blink {
+        50% {
+          border-color: transparent;
+        }
+      }
+
+      /* Fireworks (canvas) */
+      canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background: transparent;
+      }
+
+      /* Floating Balloons */
+      .balloon {
+        position: absolute;
+        bottom: -150px;
+        width: 50px;
+        height: 70px;
+        background: red;
+        border-radius: 50% 50% 50% 50%;
+        animation: float 10s linear infinite;
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(-110vh);
+        }
+      }
+
+      /* Love Letters */
+      .letters {
+        margin: 30px;
+      }
+      .envelope {
+        display: inline-block;
+        width: 60px;
+        height: 40px;
+        background: #fff;
+        border: 2px solid #333;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 10px;
+        position: relative;
+      }
+      .envelope::before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: 0;
+        width: 100%;
+        height: 20px;
+        background: #f88;
+        clip-path: polygon(0 0, 50% 100%, 100% 0);
+      }
+
+      /* Surprise Button */
+      .surprise-btn {
+        background: #ff4081;
+        border: none;
+        color: white;
+        font-size: 18px;
+        padding: 12px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        margin-top: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Why I Love You */
+      .reasons {
+        margin: 30px auto;
+        width: 80%;
+        font-size: 20px;
+        text-align: left;
+      }
+      .reason {
+        opacity: 0;
+        transition: opacity 1s ease-in;
+      }
+
+      /* Rose petals */
+      .petal {
+        position: fixed;
+        top: -20px;
+        width: 20px;
+        height: 20px;
+        background: pink;
+        border-radius: 50%;
+        opacity: 0.8;
+        animation: fall 5s linear forwards;
+      }
+      @keyframes fall {
+        to {
+          transform: translateY(110vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🎂 Happy Birthday My Love ❤️</h1>
+
+    <!-- Slideshow -->
+    <div class="slideshow">
+      <img class="slides" src="img1.jpg" alt="Memory 1" />
+      <img class="slides" src="img2.jpg" alt="Memory 2" />
+      <img class="slides" src="img3.jpg" alt="Memory 3" />
+    </div>
+
+    <!-- Quote -->
+    <div class="quote">You are the best thing that ever happened to me 💕</div>
+
+    <!-- Floating Balloons -->
+    <div id="balloons"></div>
+
+    <!-- Love Letters -->
+    <div class="letters">
+      <div
+        class="envelope"
+        onclick="openLetter('You are my sunshine ☀️')"
+      ></div>
+      <div class="envelope" onclick="openLetter('I love your smile 💖')"></div>
+      <div class="envelope" onclick="openLetter('Forever yours ❤️')"></div>
+    </div>
+
+    <!-- Surprise Button -->
+    <button class="surprise-btn" onclick="dropPetals()">
+      Click for Surprise 🌹
+    </button>
+
+    <!-- Why I Love You -->
+    <div class="reasons" id="reasons">
+      <p class="reason">1. Your smile brightens my darkest days.</p>
+      <p class="reason">2. You believe in me always.</p>
+      <p class="reason">3. You make every moment magical.</p>
+      <p class="reason">4. You are my safe place and my adventure.</p>
+      <p class="reason">5. I love you more every single day ❤️</p>
+    </div>
+
+    <!-- Personalized Voice -->
+    <audio controls>
+      <source src="voice.mp3" type="audio/mpeg" />
+      Your browser does not support audio.
+    </audio>
+
+    <!-- Fireworks -->
+    <canvas id="fireworks"></canvas>
+
+    <script>
+      // Slideshow
+      let slideIndex = 0;
+      function showSlides() {
+        let slides = document.getElementsByClassName("slides");
+        for (let i = 0; i < slides.length; i++)
+          slides[i].style.display = "none";
+        slideIndex++;
+        if (slideIndex > slides.length) slideIndex = 1;
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 3000);
+      }
+      showSlides();
+
+      // Floating Balloons
+      function createBalloons() {
+        const container = document.getElementById("balloons");
+        for (let i = 0; i < 10; i++) {
+          let b = document.createElement("div");
+          b.className = "balloon";
+          b.style.left = Math.random() * 100 + "vw";
+          b.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
+          b.style.animationDuration = 5 + Math.random() * 5 + "s";
+          container.appendChild(b);
+          setTimeout(() => b.remove(), 10000);
+        }
+      }
+      setInterval(createBalloons, 2000);
+
+      // Love Letters
+      function openLetter(msg) {
+        alert(msg);
+      }
+
+      // Surprise Button - Rose Petals
+      function dropPetals() {
+        for (let i = 0; i < 30; i++) {
+          let petal = document.createElement("div");
+          petal.className = "petal";
+          petal.style.left = Math.random() * 100 + "vw";
+          petal.style.background = ["pink", "red", "hotpink"][
+            Math.floor(Math.random() * 3)
+          ];
+          petal.style.animationDuration = 3 + Math.random() * 3 + "s";
+          document.body.appendChild(petal);
+          setTimeout(() => petal.remove(), 5000);
+        }
+      }
+
+      // Reveal Reasons
+      const reasons = document.querySelectorAll(".reason");
+      let delay = 1000;
+      reasons.forEach((r, i) => {
+        setTimeout(() => {
+          r.style.opacity = 1;
+        }, delay * i);
+      });
+
+      // Fireworks (simple particle effect)
+      const canvas = document.getElementById("fireworks");
+      const ctx = canvas.getContext("2d");
+      canvas.width = innerWidth;
+      canvas.height = innerHeight;
+      class Particle {
+        constructor(x, y, color) {
+          this.x = x;
+          this.y = y;
+          this.color = color;
+          this.radius = 2;
+          this.vx = (Math.random() - 0.5) * 6;
+          this.vy = (Math.random() - 0.5) * 6;
+          this.alpha = 1;
+        }
+        draw() {
+          ctx.globalAlpha = this.alpha;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.alpha -= 0.01;
+          this.draw();
+        }
+      }
+      let particles = [];
+      function fireworks(x, y) {
+        const colors = ["red", "yellow", "white", "blue", "pink", "lime"];
+        for (let i = 0; i < 50; i++) {
+          particles.push(
+            new Particle(
+              x,
+              y,
+              colors[Math.floor(Math.random() * colors.length)]
+            )
+          );
+        }
+      }
+      canvas.addEventListener("click", (e) => fireworks(e.clientX, e.clientY));
+      function animate(){
+  requestAnimationFrame(animate);
+  ctx.clearRect(0,0,canvas.width,canvas.height); // clears each frame (transparent background)
+  particles.forEach((p,i)=>{
+    if(p.alpha<=0){particles.splice(i,1);}
+    else p.update();
+  });
+}
+
+      animate();
+    </script>
+  </body>
+</html>
