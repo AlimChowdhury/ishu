@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Happy Birthday My Love ❤️</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>🎂 Happy Birthday My Love ❤️</h1>
+
+    <!-- Slideshow -->
+    <div class="slideshow">
+      <img class="slides" src="img1.jpg" alt="Memory 1" />
+      <img class="slides" src="img2.jpg" alt="Memory 2" />
+      <img class="slides" src="img3.jpg" alt="Memory 3" />
+    </div>
+
+    <!-- Quote -->
+    <div class="quote">You are the best thing that ever happened to me 💕</div>
+
+    <!-- Love Letters -->
+    <div class="letters">
+      <div class="envelope" onclick="openLetter('You are my sunshine ☀️')"></div>
+      <div class="envelope" onclick="openLetter('I love your smile 💖')"></div>
+      <div class="envelope" onclick="openLetter('Forever yours ❤️')"></div>
+    </div>
+
+    <!-- Surprise Button -->
+    <button class="surprise-btn" onclick="dropPetals()">
+      Click for Surprise 🌹
+    </button>
+
+    <!-- Why I Love You -->
+    <div class="reasons" id="reasons">
+      <p class="reason">1. Your smile brightens my darkest days.</p>
+      <p class="reason">2. You believe in me always.</p>
+      <p class="reason">3. You make every moment magical.</p>
+      <p class="reason">4. You are my safe place and my adventure.</p>
+      <p class="reason">5. I love you more every single day ❤️</p>
+    </div>
+
+    <!-- Personalized Voice -->
+    <audio controls>
+      <source src="voice.mp3" type="audio/mpeg" />
+      Your browser does not support audio.
+    </audio>
+
+    <!-- Fireworks Canvas -->
+    <canvas id="fireworks"></canvas>
+
+    <script src="script.js"></script>
+  </body>
+</html>
