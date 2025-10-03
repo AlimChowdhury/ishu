@@ -3,18 +3,18 @@ const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 canvas.width = innerWidth;
 canvas.height = innerHeight;
+ let slideIndex = 0;
+      function showSlides() {
+        let slides = document.getElementsByClassName("slides");
+        for (let i = 0; i < slides.length; i++)
+          slides[i].style.display = "none";
+        slideIndex++;
+        if (slideIndex > slides.length) slideIndex = 1;
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 3000);
+      }
+      showSlides();
 
-/* Why I Love You */
-      .reasons {
-        margin: 30px auto;
-        width: 80%;
-        font-size: 20px;
-        text-align: left;
-      }
-      .reason {
-        opacity: 0;
-        transition: opacity 1s ease-in;
-      }
 class Particle {
   constructor(x, y, color) {
     this.x = x;
@@ -89,4 +89,5 @@ function animate() {
 }
 
 animate();
+
 
