@@ -44,8 +44,14 @@ class Particle {
 function openLetter(msg) {
   alert(msg);
 }
-
-
+// Reveal Reasons
+const reasons = document.querySelectorAll(".reason");
+let delay = 1000;
+reasons.forEach((r, i) => {
+ setTimeout(() => {
+ r.style.opacity = 1;
+ }, delay * i);
+});
 // Surprise Button - Petals
 function dropPetals() {
   for (let i = 0; i < 30; i++) {
@@ -89,5 +95,6 @@ function animate() {
 }
 
 animate();
+
 
 
